@@ -1,9 +1,9 @@
+import React, { useState } from 'react'
 import { Backdrop, Button, Fade, FormControl, FormControlLabel, FormLabel, Grid, MenuItem, Modal, Radio, RadioGroup, Stack, styled, TextField, } from '@mui/material';
 import { Box } from '@mui/system'
-import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 
-export default function addtable() {
+export default function Addtable() {
     const style = {
         position: 'absolute',
         top: '50%',

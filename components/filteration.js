@@ -3,7 +3,7 @@ import Tabledata from "./Tabledata";
 import { CSVLink } from "react-csv";
 import { Box, Button, FormControl, Grid, IconButton, MenuItem, Stack, TextField } from "@mui/material";
 import { Refresh, Replay, Search } from "@mui/icons-material";
-import Addtable from "./addtable";
+import Addtable from "./Addtable";
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 import Head from "next/head";
@@ -111,7 +111,7 @@ export default function Filteration() {
                                     onChange={(date) => setEndDate(date)}
                                 />
                             </div> */}
-                            <div className="mt-3">
+                            <div sx={{ marginTop: "14px" }}>
                             <Addtable/>
                             </div>
                                 
