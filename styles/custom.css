@@ -1,0 +1,197 @@
+/* login page  */
+.loginbox {
+    height: 100vh;
+    display: grid;
+    place-content: center;
+}
+
+.form-s-card {
+    border: 2px solid transparent;
+    border-radius: 10px;
+    border-radius: 10px;
+    padding: 50px;
+    width: fit-content;
+    animation: loginanime 10s infinite ;
+}
+
+@keyframes loginanime {
+    25% {
+        background: linear-gradient(white, white) padding-box,
+            linear-gradient(to right, #F14722, #239B99) border-box;
+    }
+
+    50% {
+        background: linear-gradient(white, white) padding-box,
+            linear-gradient(to bottom, #F14722, #239B99) border-box;
+    }
+
+    75% {
+        background: linear-gradient(white, white) padding-box,
+            linear-gradient(to left, #F14722, #239B99) border-box;
+    }
+
+    100% {
+        background: linear-gradient(white, white) padding-box,
+            linear-gradient(to top, #F14722, #239B99) border-box;
+    }
+}
+
+.loginbtn {
+    margin: auto !important;
+    display: block;
+}
+
+.formcontrols {
+    display: grid;
+    place-content: center;
+    height: 100%;
+}
+
+/* datatable */
+.heading {
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 20px;
+    background: linear-gradient(white, white) padding-box,
+        linear-gradient(to right, #F14722, #239B99) border-box;
+    margin-top: 10px;
+    display: flex;
+}
+
+.resume-text {
+    font-size: 25px;
+    font-weight: 700;
+    margin: auto 30px;
+}
+
+.loginbtn,
+.expbtn,.addempbtn ,.subbtn {
+    width: 100px;
+    padding: 10px;
+    color: white;
+    border-radius: 20px;
+    background-color: #F14722;
+}
+
+.loginbtn:hover,
+.expbtn:hover ,.addempbtn:hover ,.subbtn:hover{
+    background-color: #239B99;
+    animation: btnani 1s;
+}
+
+@keyframes btnani {
+    from {
+        background-color: #F14722;
+    }
+
+    to {
+        background-color: #239B99;
+    }
+
+}
+
+.filters {
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 20px;
+    background: linear-gradient(white, white) padding-box,
+        linear-gradient(to right, #F14722, #239B99) border-box;
+}
+
+.datepicker {
+    display: flex;
+    padding: 20px 0px;
+}
+
+.datepicker label {
+    margin: 0px 5px;
+}
+
+@media only screen and (max-width : 991) {
+    .datepicker {
+        display: block;
+    }
+}
+/* add new emp  */
+.addnewem{
+    font-size: 20px;
+    font-weight: lighter;
+}
+.errormsg{
+    color: #F14722;
+    font-size: 12px;
+}
+/* loading animation  */
+.loading-card {
+    margin: 10px;
+    /* max-width: 600px; */
+    background: #fff;
+}
+
+.loading-content {
+    padding: 20px 30px;
+}
+
+@keyframes shine {
+    to {
+        background-position-x: -200%;
+    }
+}
+
+.loading-card-cell {
+    background: #eee;
+    background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+    border-radius: 5px;
+    background-size: 200% 100%;
+    animation: 1.5s shine linear infinite;
+}
+
+.loading-card-cell {
+    margin: 10px;
+    height: 60px;
+    width: 150px;
+}
+
+.card-loading {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+}
+
+/* pagination */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.previous,
+.next {
+    padding: 5px;
+    border: none;
+    width: 60px;
+    border-radius: 10px;
+    background-color: transparent !important;
+}
+
+.pagination a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.pagination li {
+    font-size: 22px;
+    text-align: center;    
+    border-radius: 30px;
+    margin: 0px 5px 0px 5px;
+}
+
+.pagination a:hover,
+.active  {
+    margin: 0px 5px 0px 5px;
+    color: white;
+    padding: 0px 10px 0px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    background-color:antiquewhite 
+}
