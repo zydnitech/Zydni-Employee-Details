@@ -9,7 +9,6 @@ import Addtable from "./Addtable";
 import Head from "next/head";
 import Image from "next/image";
 import styled from "@emotion/styled";
-import axios from "axios";
 
 export default function Filteration() {
     const TextFields = styled(TextField)({

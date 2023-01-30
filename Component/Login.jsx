@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Box, Button, Card, FormControl, InputAdornment, TextField } from "@mui/material"
 import { AccountCircle } from "@mui/icons-material"
 import { useForm } from "react-hook-form";
-import Image from 'next/image';
 import Head from 'next/head';
 
 export default function Login({ data }) {
@@ -24,7 +23,7 @@ export default function Login({ data }) {
             </Head>
             <Box className="logincard">
                 <Card className='form-s-card'>
-                    <Image src="/zydni_logo.png" alt='Company Logo' width={200} height={100} />
+                    <img src="/zydni_logo.png" alt='Company Logo' width={200} height={100} />
                     {/* <img src="../images/zydni_logo.svg" alt="" /> */}
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <FormControl variant="standard" sx={{ m: 1, minWidth: 80 }}>
