@@ -121,7 +121,7 @@ export default function Tabledata({ data, search, value }) {
                             }).map((d, i) => {
                                 return (
                                     <tr key={i}>
-                                        <td >{d.id}</td>
+                                        {/* <td >{d.id}</td>
                                         <td>{d.fname + " " + d.lname}</td>
                                         <td style={{ "wordBreak": "break-all" }}>{d.email}</td>
                                         <td>{d.contact}</td>
@@ -132,24 +132,22 @@ export default function Tabledata({ data, search, value }) {
                                         <td>{d.refer}</td>
                                         <td style={{ "wordBreak": "break-all" }}>{d.file}</td>
                                         <td>{d.para.slice(0, 100)}</td>
-                                        {updatestatus === d.id ? <td id="status-data">{...rstatus}</td> : <td id="status-data">Update Resume </td>}
-                                        <td><Button onClick={() => { handleOpen(); updatestatusfunc(d.id); }}>Update</Button></td>
-
+                                        {updatestatus === d.id ? <td id="status-data">{rstatus}</td> : <td id="status-data">Update Resume </td>}
+                                        <td><Button onClick={() => { handleOpen(); updatestatusfunc(d.id); }}>Update</Button></td> */}
                                         {/* zydni data  */}
-                                        {/* <td >{i}</td>
+                                        <td >{d.Id}</td>
                                         <td>{d.FirstName + " " + d.LastName}</td>
                                         <td style={{ "wordBreak": "break-all" }}>{d.Email}</td>
-                                        <td>{d.ContactNumber}</td>
+                                        <td>{d.ContactNo}</td>
                                         <td>{d.Qualification}</td>
                                         <td>{d.Date}</td>
                                         <td>{d.SkillSet}</td>
-                                        <td>{d.AreYouExperienced}</td>
-                                        <td>{d.WhereYouFoundUs}</td>
+                                        <td>{d.Experienced}</td>
+                                        <td>{d.Reference}</td>
                                         <td style={{ "wordBreak": "break-all" }}>{d.resume1}</td>
                                         <td>{d.Comments}</td>
-                                        {updatestatus == d.id ? <td id="status-data">{rstatus}</td> : <td id="status-data">Update Profile</td>}
-                                        <td>{d.Status}</td>
-                                        <td><Button onClick={handleOpen}>Update</Button></td> */}
+                                        {updatestatus === d.Id ? <td id="status-data">{rstatus}</td> : <td id="status-data">Update Resume </td>}
+                                        <td><Button onClick={() => { handleOpen(); updatestatusfunc(d.Id); }}>Update</Button></td>
                                     </tr>
                                 )
                             })

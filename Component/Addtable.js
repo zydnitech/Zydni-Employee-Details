@@ -47,6 +47,12 @@ export default function Addtable() {
     } = useForm();
     const [data, setdata] = useState([]);
     const onSubmit = (d) => {
+
+        const body = {
+            ...d,
+            Reference: "Instag"
+        }
+        console.log("THIS IS THE DATA <><><>", d);
         // setdata(d)
         // fetch('http://192.168.0.101:8030/api/resumeapi', {
         //     method: 'POST',
@@ -69,19 +75,52 @@ export default function Addtable() {
         //     .then((response) => response.json())
         //     .then((json) => console.log(json));
 
-        axios.post('http://192.168.0.101:8030/api/resumeapi', {
-            FirstName: '',
-            LastName: '',   
-            Email: '',
-            ContactNo: '',
-            Qualification: '',
-            SkillSet: '',
-            Experience: '',
-            Reference: '',
-            resume1: '',
+        //     axios({
+        //         method: 'post',
+        //         url: 'http://192.168.0.101:8030/api/resumeapi',
+        //         data: {
+        //         FirstName: d.FirstName,
+        //         LastName: d.LastName,   
+        //         Email: d.Email,
+        //         ContactNo: d.ContactNo,
+        //         Qualification: d.Qualification,
+        //         SkillSet: d.SkillSet,
+        //         Experience: d.Experience,
+        //         Reference: d.Reference,
+        //         resume1: d.resume1,
+        //     }})         .catch(function (error) {
+        //         console.log(error);
+        //       });
+        // }
+
+
+        // {
+        //     "FirstName": "Raashid Test",
+        //     "LastName": "R",
+        //     "Email": "rass@gmail.com",
+        //     "ContactNo": 6465515,
+        //     "Qualification": "BCA",
+        //     "SkillSet": "Jasdsva",
+        //     "Experience": true,
+        //     "Reference": "others",
+        //     "Status": true,
+        //     "Comments": "sdfbjshdbfhjksdbfhjsdbfjhsd",
+        //     "resume1": null
+        // }
+
+        axios(`http://192.168.0.101:8030/api/resumeapi`, body).then((res) => {
+            console.log('THIS IS THE RESPONSE FROM THE API RAASHID', res);
+        }).catch((e) => {
+            console.log('ERROR OCCURED', e);
         })
-            .then((response) => response.json())
-            .then((json) => console.log(json));
+
+
+        // axios.post('http://192.168.0.101:8030/api/resumeapi', d).then(function (response) {
+        //     console.log(response);
+        // })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
     }
     console.log(data)
     return (
@@ -165,7 +204,8 @@ export default function Addtable() {
                                                     <p className="errormsg">{errors.Experience.message}</p>
                                                 )}
                                             </FormControl></Grid>
-                                            <Grid item lg={12}>  <TextFields
+                                            <Grid item lg={12}>
+                                                {/* <TextFields
                                                 variant="outlined"
                                                 fullWidth sx={{ margin: '0px 5px' }}
                                                 value={value}
@@ -189,16 +229,17 @@ export default function Addtable() {
                                                 <MenuItem key={5} value="From Others">
                                                     From Others
                                                 </MenuItem>
-                                            </TextFields>
+                                            </TextFields> */}
                                                 {errors.social && (
                                                     <p className="errormsg">{errors.social.message}</p>
                                                 )}</Grid>
-                                            <Grid item lg={12}> <TextFields fullWidth sx={{ margin: '0px 5px' }} label="Upload Your Resume" type="file" variant="outlined" InputLabelProps={{ shrink: true }}   {...register("resume", {
+                                            {/* <Grid item lg={12}> 
+                                            <TextFields fullWidth sx={{ margin: '0px 5px' }} label="Upload Your Resume" type="file" variant="outlined" InputLabelProps={{ shrink: true }}   {...register("resume", {
                                                 required: "Please upload your resume",
                                             })} />
                                                 {errors.resume && (
                                                     <p className="errormsg">{errors.resume.message}</p>
-                                                )}</Grid>
+                                                )}</Grid> */}
                                         </Stack>
                                     </Grid>
                                     <Grid item lg={6}>

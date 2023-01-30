@@ -21,16 +21,16 @@ export default function Filteration() {
     });
     // data fetch
     const [js, setjs] = useState([]);
-    useEffect(() => {
-        fetch("https://api.mockaroo.com/api/2b1e9230?count=1000&key=abad0ad0")
-            .then((response) => response.json())
-            .then((data) => setjs(data));
-    }, []);
     // useEffect(() => {
-    //     fetch('http://192.168.0.101:8081/api/zydniapi')
+    //     fetch("https://api.mockaroo.com/api/2b1e9230?count=1000&key=abad0ad0")
     //         .then((response) => response.json())
     //         .then((data) => setjs(data));
     // }, []);
+    useEffect(() => {
+        fetch('http://192.168.0.101:8030/api/resumeapi')
+            .then((response) => response.json())
+            .then((data) => setjs(data));
+    }, []);
     // console.log(js);
     //  search entites
     const [value, setValue] = useState(5);
