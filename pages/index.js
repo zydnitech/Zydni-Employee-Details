@@ -1,4 +1,5 @@
-import Homepage from '@/Component/homepage'
+// import Homepage from '/Component/Homepage'
+import Homepage from '../Component/Homepage'
 import React from 'react'
 
 // import Homepage from '../components/Homepage'
