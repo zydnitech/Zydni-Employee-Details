@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Backdrop, Button, Fade, FormControl, FormControlLabel, FormLabel, Grid, MenuItem, Modal, Radio, RadioGroup, Stack, styled, TextField, } from '@mui/material';
 import { Box } from '@mui/system'
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 export default function Addtable() {
     const style = {
@@ -23,7 +24,7 @@ export default function Addtable() {
             '& fieldset': {
                 borderColor: 'Black',
                 borderRadius: "10px",
-                margin:'0px 4px'
+                margin: '0px 4px'
             },
             '&:hover fieldset': {
                 borderImage: 'linear-gradient(to right, #F14722, #239B99) 1',
@@ -47,31 +48,45 @@ export default function Addtable() {
     const [data, setdata] = useState([]);
     const onSubmit = (d) => {
         // setdata(d)
-        fetch('http://192.168.0.101:8030/api/resumeapi', {
-            method: 'POST',
-            // body: JSON.stringify({
-            //     FirstName: '',
-            //     LastName:'',
-            //     Email: '',
-            //     ContactNo:'',
-            //     Qualification:'',
-            //     SkillSet:'',
-            //     Experience:'',    
-            //     Reference:'',    
-            //     resume1:'',    
-            //   }), 
-                 body: JSON.stringify(d),
-              headers: {
-                'Content-type': 'application/json; charset=UTF-8'
-              },
-          })
+        // fetch('http://192.168.0.101:8030/api/resumeapi', {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //         FirstName: '',
+        //         LastName:'',
+        //         Email: '',
+        //         ContactNo:'',
+        //         Qualification:'',
+        //         SkillSet:'',
+        //         Experience:'',    
+        //         Reference:'',    
+        //         resume1:'',    
+        //       }), 
+        //          body: JSON.stringify(d),
+        //       headers: {
+        //         'Content-type': 'application/json; charset=UTF-8'
+        //       },
+        //   })
+        //     .then((response) => response.json())
+        //     .then((json) => console.log(json));
+
+        axios.post('http://192.168.0.101:8030/api/resumeapi', {
+            FirstName: '',
+            LastName: '',   
+            Email: '',
+            ContactNo: '',
+            Qualification: '',
+            SkillSet: '',
+            Experience: '',
+            Reference: '',
+            resume1: '',
+        })
             .then((response) => response.json())
             .then((json) => console.log(json));
     }
     console.log(data)
     return (
         <Box>
-            <Button onClick={handleOpen} sx={{ width: 'fit-content !important' }} className="addempbtn">Add Employee</Button>
+            <Button onClick={handleOpen} variant="contained" sx={{ width: 'fit-content !important', marginTop: "14px" }} className="addempbtn">Add Employee</Button>
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -89,13 +104,13 @@ export default function Addtable() {
                         <form onSubmit={handleSubmit(onSubmit)}  >
                             <Stack spacing={3}>
                                 <Grid container>
-                                    <Grid item lg={6}><TextFields fullWidth sx={{margin:'0px 5px'}} label="First Name" variant="outlined"  {...register("FirstName", {
+                                    <Grid item lg={6}><TextFields fullWidth sx={{ margin: '0px 5px' }} label="First Name" variant="outlined"  {...register("FirstName", {
                                         required: " Enter your firstname",
                                     })} />
                                         {errors.FirstName && (
                                             <p className="errormsg">{errors.FirstName.message}</p>
                                         )}</Grid>
-                                    <Grid item lg={6}> <TextFields fullWidth sx={{margin:'0px 5px'}} label="Last Name" variant="outlined" {...register("LastName", {
+                                    <Grid item lg={6}> <TextFields fullWidth sx={{ margin: '0px 5px' }} label="Last Name" variant="outlined" {...register("LastName", {
                                         required: " Enter your Last Name",
                                     })} />
                                         {errors.LastName && (
@@ -103,26 +118,26 @@ export default function Addtable() {
                                         )} </Grid>
                                 </Grid>
                                 <Grid container>
-                                    <Grid item lg={6}><TextFields fullWidth sx={{margin:'0px 5px'}} label="Email" type={"email"} variant="outlined" {...register("Email", {
+                                    <Grid item lg={6}><TextFields fullWidth sx={{ margin: '0px 5px' }} label="Email" type={"email"} variant="outlined" {...register("Email", {
                                         required: " Enter your E-Mail",
                                     })} />
                                         {errors.Email && (
                                             <p className="errormsg">{errors.Email.message}</p>
                                         )}</Grid>
-                                    <Grid item lg={6}> <TextFields fullWidth sx={{margin:'0px 5px'}} label="Contact Number" type={"number"} variant="outlined" {...register("ContactNo", {
+                                    <Grid item lg={6}> <TextFields fullWidth sx={{ margin: '0px 5px' }} label="Contact Number" type={"number"} variant="outlined" {...register("ContactNo", {
                                         required: " Enter your Contact Number",
                                     })} />{errors.ContactNo && (
                                         <p className="errormsg">{errors.ContactNo.message}</p>
                                     )} </Grid>
                                 </Grid>
                                 <Grid container>
-                                    <Grid item lg={6}> <TextFields fullWidth sx={{margin:'0px 5px'}} label="Qualification" variant="outlined" {...register("Qualification", {
+                                    <Grid item lg={6}> <TextFields fullWidth sx={{ margin: '0px 5px' }} label="Qualification" variant="outlined" {...register("Qualification", {
                                         required: " Enter your Qualification",
                                     })} />
                                         {errors.Qualification && (
                                             <p className="errormsg">{errors.Qualification.message}</p>
                                         )}</Grid>
-                                    <Grid item lg={6}><TextFields fullWidth sx={{margin:'0px 5px'}} label="Skillset" variant="outlined" {...register("SkillSet", {
+                                    <Grid item lg={6}><TextFields fullWidth sx={{ margin: '0px 5px' }} label="Skillset" variant="outlined" {...register("SkillSet", {
                                         required: " Enter your Skillsets",
                                     })} />
                                         {errors.SkillSet && (
@@ -152,7 +167,7 @@ export default function Addtable() {
                                             </FormControl></Grid>
                                             <Grid item lg={12}>  <TextFields
                                                 variant="outlined"
-                                                fullWidth sx={{margin:'0px 5px'}}
+                                                fullWidth sx={{ margin: '0px 5px' }}
                                                 value={value}
                                                 onChange={(e) => setValue(e.target.value)}
                                                 select
@@ -178,7 +193,7 @@ export default function Addtable() {
                                                 {errors.social && (
                                                     <p className="errormsg">{errors.social.message}</p>
                                                 )}</Grid>
-                                            <Grid item lg={12}> <TextFields fullWidth sx={{margin:'0px 5px'}} label="Upload Your Resume" type="file" variant="outlined" InputLabelProps={{ shrink: true }}   {...register("resume", {
+                                            <Grid item lg={12}> <TextFields fullWidth sx={{ margin: '0px 5px' }} label="Upload Your Resume" type="file" variant="outlined" InputLabelProps={{ shrink: true }}   {...register("resume", {
                                                 required: "Please upload your resume",
                                             })} />
                                                 {errors.resume && (
@@ -188,7 +203,7 @@ export default function Addtable() {
                                     </Grid>
                                     <Grid item lg={6}>
                                         <Grid item lg={12}>
-                                            <TextFields fullWidth sx={{margin:'0px 5px'}}
+                                            <TextFields fullWidth sx={{ margin: '0px 5px' }}
                                                 id="outlined-multiline-static"
                                                 label="Comments"
                                                 multiline

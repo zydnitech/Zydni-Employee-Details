@@ -3,7 +3,7 @@ import { Backdrop, Box, Button, Fade, Modal } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 
-export default function Tabledata({ data, search, value, sdate, edate, dateFilter }) {
+export default function Tabledata({ data, search, value }) {
     // pagination
     const [currentItems, setCurrentItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
@@ -37,7 +37,7 @@ export default function Tabledata({ data, search, value, sdate, edate, dateFilte
     }
     const handleClose = () => setOpen(false);
     //   rstatus action 
-    const [rstatus, setrstatus] = useState("Update")
+    const [rstatus, setrstatus] = useState([])
     const [updatestatus, setupdatestatus] = useState(null)
     console.log(updatestatus, 'hdddsssmm')
     // const statusbtn = (e) => {
@@ -94,19 +94,19 @@ export default function Tabledata({ data, search, value, sdate, edate, dateFilte
                     <table className="table table-bordered align-middle" id="table1" >
                         <thead>
                             <tr>
-                                <th style={{ "width": "4%" }}>id</th>
-                                <th style={{ "width": "10%" }}>Full Name</th>
+                                <th >id</th>
+                                <th style={{ "width": "20%" }}>Full Name</th>
                                 <th style={{ "width": "20%" }}>Email</th>
-                                <th style={{ "width": "10%" }}>Contact Number</th>
-                                <th style={{ "width": "10%" }}>Qualification</th>
-                                <th style={{ "width": "7%" }}>Date</th>
-                                <th style={{ "width": "10%" }}>SkillSets</th>
-                                <th style={{ "width": "4%" }}>Experienced</th>
-                                <th style={{ "width": "6%" }}>Reference</th>
-                                <th style={{ "width": "10%" }}>Resume</th>
+                                <th style={{ "width": "20%" }}>Contact Number</th>
+                                <th >Qualification</th>
+                                <th >Date</th>
+                                <th >SkillSets</th>
+                                <th >Experienced</th>
+                                <th >Reference</th>
+                                <th style={{ "width": "20%" }}>Resume</th>
                                 <th style={{ "width": "30%" }}>Comment</th>
-                                <th style={{ "width": "10%" }}>Status</th>
-                                <th style={{ "width": "10%" }}>Action</th>
+                                <th >Status</th>
+                                <th >Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -132,7 +132,7 @@ export default function Tabledata({ data, search, value, sdate, edate, dateFilte
                                         <td>{d.refer}</td>
                                         <td style={{ "wordBreak": "break-all" }}>{d.file}</td>
                                         <td>{d.para.slice(0, 100)}</td>
-                                        {updatestatus === d.id ? <td id="status-data">{rstatus}</td> : <td id="status-data">Update Resume </td>}
+                                        {updatestatus === d.id ? <td id="status-data">{...rstatus}</td> : <td id="status-data">Update Resume </td>}
                                         <td><Button onClick={() => { handleOpen(); updatestatusfunc(d.id); }}>Update</Button></td>
 
                                         {/* zydni data  */}
@@ -150,9 +150,7 @@ export default function Tabledata({ data, search, value, sdate, edate, dateFilte
                                         {updatestatus == d.id ? <td id="status-data">{rstatus}</td> : <td id="status-data">Update Profile</td>}
                                         <td>{d.Status}</td>
                                         <td><Button onClick={handleOpen}>Update</Button></td> */}
-
                                     </tr>
-
                                 )
                             })
                             }

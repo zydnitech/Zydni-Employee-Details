@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Filteration from "./filteration";
-import Login from "./login";
+import Filteration from "./Filteration";
+import Login from "./Login";
 export default function Homepage() {
   const [userdata, setuserdata] = useState({username:"",password:""});
 const [logincre, setlogincre] = useState({})
