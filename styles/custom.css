@@ -11,7 +11,7 @@
     border-radius: 10px;
     padding: 50px;
     width: fit-content;
-    animation: loginanime 10s infinite ;
+    animation: loginanime 10s infinite;
 }
 
 @keyframes loginanime {
@@ -65,18 +65,22 @@
 }
 
 .loginbtn,
-.expbtn,.addempbtn ,.subbtn {
+.expbtn,
+.addempbtn,
+.subbtn {
     width: 100px;
-    padding: 10px;
-    color: white;
-    border-radius: 20px;
-    background-color: #F14722;
+    padding: 10px !important;
+    color: white !important;
+    border-radius: 20px !important;
+    background-color: #F14722 !important;
 }
 
 .loginbtn:hover,
-.expbtn:hover ,.addempbtn:hover ,.subbtn:hover{
-    background-color: #239B99;
-    animation: btnani 1s;
+.expbtn:hover,
+.addempbtn:hover,
+.subbtn:hover {
+    background-color: #239B99 !important;
+    animation: btnani 1s !important;
 }
 
 @keyframes btnani {
@@ -112,15 +116,32 @@
         display: block;
     }
 }
+
 /* add new emp  */
-.addnewem{
+.addnewem {
     font-size: 20px;
     font-weight: lighter;
 }
-.errormsg{
+
+.errormsg {
     color: #F14722;
     font-size: 12px;
+    margin: 5px 0px 0px 10px;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="radio"] {
+    cursor: pointer;
+    margin-right: 23px;
+    width: 55px;
+    height: 22px;
+}
+
 /* loading animation  */
 .loading-card {
     margin: 10px;
@@ -181,17 +202,28 @@
 
 .pagination li {
     font-size: 22px;
-    text-align: center;    
+    text-align: center;
     border-radius: 30px;
     margin: 0px 5px 0px 5px;
 }
 
 .pagination a:hover,
-.active  {
+.active {
     margin: 0px 5px 0px 5px;
     color: white;
     padding: 0px 10px 0px 10px;
     border-radius: 10px;
     text-decoration: none;
-    background-color:antiquewhite 
+    background-color: antiquewhite
+}
+
+/* add table */
+#selection {
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+}
+
+#selection:hover {
+    border-image: linear-gradient(to right, #F14722, #239B99) 1
 }

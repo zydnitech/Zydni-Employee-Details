@@ -3,7 +3,7 @@ import { Backdrop, Box, Button, Fade, Modal } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 
-export default function Tabledata({ data, search, value }) {
+export default function Tabledata({ data, value }) {
     // pagination
     const [currentItems, setCurrentItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
@@ -39,27 +39,13 @@ export default function Tabledata({ data, search, value }) {
     //   rstatus action 
     const [rstatus, setrstatus] = useState([])
     const [updatestatus, setupdatestatus] = useState(null)
-    console.log(updatestatus, 'hdddsssmm')
-    // const statusbtn = (e) => {
-    //     setupdatestatus(data)
-    //     setrstatus(e.target.value)
-    //     const statusdata = document.getElementById("statusdata")
-    //     if (statusdata === 'Accepted') {
-    //         statusdata.style.color = "Green"
-    //     } else if (statusdata === 'Hold' && statusdata === 'Waiting') {
-    //         statusdata.style.color = "Orange"
-    //     } else if (statusdata === 'Failed') {
-    //         statusdata.style.color = "red"
-    //     }
-    //     else {
-    //         statusdata.style.color = "blue"
-    //     }
-    // }
-    console.log(updatestatus, "update")
     const updatestatusfunc = (d) => {
         setupdatestatus(d)
     }
-
+const updatingstatus = (e) =>{
+   const d= e.target.value
+   document.getElementById("statusData").innerHTML=d
+}
     return (
         <div className="container mt-5 mb-5">
             {currentItems?.length === 0 ? (
@@ -104,21 +90,13 @@ export default function Tabledata({ data, search, value }) {
                                 <th >Experienced</th>
                                 <th >Reference</th>
                                 <th style={{ "width": "20%" }}>Resume</th>
-                                <th style={{ "width": "30%" }}>Comment</th>
+                                {/* <th style={{ "width": "30%" }}>Comment</th> */}
                                 <th >Status</th>
                                 <th >Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {currentItems?.filter((value) => {
-                                if (search === "") {
-                                    return value;
-                                } else if (
-                                    value.fname.toLowerCase().includes(search.toLowerCase())
-                                ) {
-                                    return value;
-                                }
-                            }).map((d, i) => {
+                            { currentItems?.map((d, i) => {
                                 return (
                                     <tr key={i}>
                                         {/* <td >{d.id}</td>
@@ -140,13 +118,13 @@ export default function Tabledata({ data, search, value }) {
                                         <td style={{ "wordBreak": "break-all" }}>{d.Email}</td>
                                         <td>{d.ContactNo}</td>
                                         <td>{d.Qualification}</td>
-                                        <td>{d.Date}</td>
+                                        <td>{d.Dates}</td>
                                         <td>{d.SkillSet}</td>
-                                        <td>{d.Experienced}</td>
+                                        <td>{d.Experience}</td>
                                         <td>{d.Reference}</td>
                                         <td style={{ "wordBreak": "break-all" }}>{d.resume1}</td>
-                                        <td>{d.Comments}</td>
-                                        {updatestatus === d.Id ? <td id="status-data">{rstatus}</td> : <td id="status-data">Update Resume </td>}
+                                        {/* <td>{d.Comments}</td> */}
+                                        {updatestatus === d.Id ? <td id="statusData">Update Resume</td> : <td >Update Resume </td>}
                                         <td><Button onClick={() => { handleOpen(); updatestatusfunc(d.Id); }}>Update</Button></td>
                                     </tr>
                                 )
@@ -170,34 +148,13 @@ export default function Tabledata({ data, search, value }) {
                 <Fade in={open}>
                     <Box sx={style}>
                         <Box sx={{ "margin": "auto" }} className="modal-box">
-                            <Button value="Normal Discussion" sx={{ "margin": "10px" }} onClick={(e) => {
-
-                                setrstatus(e.target.value)
-                            }} variant="outlined" color="success" >Normal Discussion</Button>
-                            <Button value="Technical Round" sx={{ "margin": "10px" }} onClick={(e) => {
-
-                                setrstatus(e.target.value)
-                            }} variant="outlined" color="warning" >Technical Round</Button>
-                            <Button value="Short listed" sx={{ "margin": "10px" }} onClick={(e) => {
-
-                                setrstatus(e.target.value)
-                            }} variant="outlined" color="warning" >Short listed</Button>
-                            <Button value="Selected" sx={{ "margin": "10px" }} onClick={(e) => {
-
-                                setrstatus(e.target.value)
-                            }} variant="outlined" color='success' >Selected</Button>
-                            <Button value="Hold" sx={{ "margin": "10px" }} onClick={(e) => {
-
-                                setrstatus(e.target.value)
-                            }} variant="outlined" color="error" >Hold</Button>
-                            <Button value="Onboard" sx={{ "margin": "10px" }} onClick={(e) => {
-
-                                setrstatus(e.target.value)
-                            }} variant="outlined" color='success' >Onboard</Button>
-                            <Button value="Rejected" sx={{ "margin": "10px" }} onClick={(e) => {
-
-                                setrstatus(e.target.value)
-                            }} variant="outlined" color="error" >Rejected</Button>
+                            <Button value="Normal Discussion" sx={{ "margin": "10px" }} onClick={updatingstatus} variant="outlined" color="success" >Normal Discussion</Button>
+                            <Button value="Technical Round" sx={{ "margin": "10px" }} onClick={updatingstatus} variant="outlined" color="warning" >Technical Round</Button>
+                            <Button value="Short listed" sx={{ "margin": "10px" }} onClick={updatingstatus} variant="outlined" color="warning" >Short listed</Button>
+                            <Button value="Selected" sx={{ "margin": "10px" }} onClick={updatingstatus} variant="outlined" color='success' >Selected</Button>
+                            <Button value="Hold" sx={{ "margin": "10px" }} onClick={updatingstatus} variant="outlined" color="error" >Hold</Button>
+                            <Button value="Onboard" sx={{ "margin": "10px" }} onClick={updatingstatus} variant="outlined" color='success' >Onboard</Button>
+                            <Button value="Rejected" sx={{ "margin": "10px" }} onClick={updatingstatus} variant="outlined" color="error" >Rejected</Button>
                         </Box>
                     </Box>
                 </Fade>

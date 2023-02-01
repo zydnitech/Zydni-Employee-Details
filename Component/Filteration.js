@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import Tabledata from "./Tabledata";
 import { CSVLink } from "react-csv";
 import { Box, Button, FormControl, Grid, MenuItem, Stack, TextField } from "@mui/material";
-import {  Replay, Search } from "@mui/icons-material";
+import { Replay, Search } from "@mui/icons-material";
 import Addtable from "./Addtable";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
 import Head from "next/head";
 import Image from "next/image";
 import styled from "@emotion/styled";
@@ -29,20 +27,33 @@ export default function Filteration() {
     useEffect(() => {
         fetch('http://192.168.0.101:8030/api/resumeapi')
             .then((response) => response.json())
-            .then((data) => setjs(data));
+            .then((data) => setjs([...data].reverse()));
     }, []);
-    // console.log(js);
     //  search entites
     const [value, setValue] = useState(5);
     // search bar
-    const [search, setsearch] = useState("");
-    const searchitem = (e) => {
-        setsearch(e.target.value);
-    };
-    // date range
-    // const [startDate, setStartDate] = useState("");
-    // const [endDate, setEndDate] = useState("");
+    const [searchQuery, setsearchQuery] = useState('');
+    const [filteredData, setFilteredData] = useState(js);
 
+    const handleSearch = (event) => {
+        setsearchQuery(event.target.value);
+        setFilteredData(
+            js.filter(
+                (item) =>
+                    item.FirstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    item.LastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    item.Email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    item.ContactNo.toString().includes(searchQuery) ||
+                    item.Qualification.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    item.SkillSet.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    item.Reference.toLowerCase().includes(searchQuery.toLowerCase())
+                // item.Experience.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                // item.Date.toString().includes(searchQuery) ||
+                // item.Status.toLowerCase().includes(searchQuery.toLowerCase()) 
+            )
+        );
+    };
+    console.log(filteredData, 'data')
     // Refresher button
     const refresher = () => {
         window.location.reload(false);
@@ -91,55 +102,32 @@ export default function Filteration() {
 
                             </FormControl>
                         </Grid>
-                        <Grid item lg={2} md={3} sm={3} xs={12}>
-                            {/* <div className="datepicker">
-                                <label>From</label>
-                                <DatePicker
-                                    selected={startDate}
-                                    selectsStart
-                                    startDate={startDate}
-                                    endDate={endDate}
-                                    onChange={(date) => setStartDate(date)}
-                                />
-                                <label>To</label>
-                                <DatePicker
-                                    selected={endDate}
-                                    selectsEnd
-                                    startDate={startDate}
-                                    endDate={endDate}
-                                    minDate={startDate}
-                                    onChange={(date) => setEndDate(date)}
-                                />
-                            </div> */}
 
-                            <Addtable sx={{ marginTop: "14px" }}/>                               
+                        <Grid item lg={2} md={3} sm={3} xs={12}>
+                            <Addtable sx={{ marginTop: "14px" }} />
                         </Grid>
                         <Grid item lg={1} md={1} sm={2} xs={6}>
                             <Button aria-label="refresh" sx={{ padding: "10px 10px", marginTop: '10px' }}>
                                 <Replay onClick={refresher} />
                             </Button>
                         </Grid>
-                        <Grid item lg={2 } md={3} sm={3} xs={6}>
+                        <Grid item lg={2} md={3} sm={3} xs={6}>
                             <Button className="expbtn" variant="contained" sx={{ marginTop: "14px" }}><CSVLink data={js}>Export</CSVLink>
                             </Button>
                         </Grid>
                         <Grid item lg={4} md={7} sm={7} xs={12}>
                             <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                 <Search sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-                                <TextField id="input-with-sx searchbar" onChange={(e) => {
-                                    setsearch(e.target.value);
-                                }} label="Search..." variant="standard" />
+                                <TextField id="input-with-sx searchbar" type='search' value={searchQuery} onChange={handleSearch}
+                                    label="Search..." variant="standard" />
                             </Box>
                         </Grid>
                     </Grid>
                 </Stack>
-            </div>               
+            </div>
             <Tabledata
                 value={value}
-                search={search}
-                data={js}
-                // sdate={startDate}
-                // edate={endDate}
+                data={filteredData}
             />
 
         </Box>

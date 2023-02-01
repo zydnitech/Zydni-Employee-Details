@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
-import { Backdrop, Button, Fade, FormControl, FormControlLabel, FormLabel, Grid, MenuItem, Modal, Radio, RadioGroup, Stack, styled, TextField, } from '@mui/material';
+import { Backdrop, Button, Checkbox, Fade, FormControl, FormControlLabel, FormLabel, Grid, InputLabel, MenuItem, Modal, Radio, RadioGroup, Stack, styled, TextField, } from '@mui/material';
 import { Box } from '@mui/system'
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import axios from 'axios';
+import { Instagram } from '@mui/icons-material';
+// import Select from "react-select";
+
 
 export default function Addtable() {
     const style = {
@@ -36,93 +39,34 @@ export default function Addtable() {
             },
         },
     });
-    const [value, setValue] = useState('')
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const {
         register,
-        handleSubmit,
+        handleSubmit, control,
         formState: { errors },
     } = useForm();
-    const [data, setdata] = useState([]);
     const onSubmit = (d) => {
-
-        const body = {
-            ...d,
-            Reference: "Instag"
-        }
-        console.log("THIS IS THE DATA <><><>", d);
-        // setdata(d)
-        // fetch('http://192.168.0.101:8030/api/resumeapi', {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //         FirstName: '',
-        //         LastName:'',
-        //         Email: '',
-        //         ContactNo:'',
-        //         Qualification:'',
-        //         SkillSet:'',
-        //         Experience:'',    
-        //         Reference:'',    
-        //         resume1:'',    
-        //       }), 
-        //          body: JSON.stringify(d),
-        //       headers: {
-        //         'Content-type': 'application/json; charset=UTF-8'
-        //       },
-        //   })
-        //     .then((response) => response.json())
-        //     .then((json) => console.log(json));
-
-        //     axios({
-        //         method: 'post',
-        //         url: 'http://192.168.0.101:8030/api/resumeapi',
-        //         data: {
-        //         FirstName: d.FirstName,
-        //         LastName: d.LastName,   
-        //         Email: d.Email,
-        //         ContactNo: d.ContactNo,
-        //         Qualification: d.Qualification,
-        //         SkillSet: d.SkillSet,
-        //         Experience: d.Experience,
-        //         Reference: d.Reference,
-        //         resume1: d.resume1,
-        //     }})         .catch(function (error) {
-        //         console.log(error);
-        //       });
+        // const body = {
+        //     ...d,
+        //     Reference: "Instag"
         // }
-
-
-        // {
-        //     "FirstName": "Raashid Test",
-        //     "LastName": "R",
-        //     "Email": "rass@gmail.com",
-        //     "ContactNo": 6465515,
-        //     "Qualification": "BCA",
-        //     "SkillSet": "Jasdsva",
-        //     "Experience": true,
-        //     "Reference": "others",
-        //     "Status": true,
-        //     "Comments": "sdfbjshdbfhjksdbfhjsdbfjhsd",
-        //     "resume1": null
-        // }
-
-        axios(`http://192.168.0.101:8030/api/resumeapi`, body).then((res) => {
-            console.log('THIS IS THE RESPONSE FROM THE API RAASHID', res);
+        axios.post(`http://192.168.0.101:8030/api/resumeapi`, d).then((res) => {
+            console.log('working', res);
         }).catch((e) => {
             console.log('ERROR OCCURED', e);
         })
-
-
-        // axios.post('http://192.168.0.101:8030/api/resumeapi', d).then(function (response) {
-        //     console.log(response);
-        // })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
+        console.log(d, 'data fetching')
     }
-    console.log(data)
+
+    const [selectedValue, setSelectedValue] = useState('');
+
+    const options = [
+        { value: "chocolate", label: "Chocolate" },
+        { value: "strawberry", label: "Strawberry" },
+        { value: "vanilla", label: "Vanilla" }
+    ]
     return (
         <Box>
             <Button onClick={handleOpen} variant="contained" sx={{ width: 'fit-content !important', marginTop: "14px" }} className="addempbtn">Add Employee</Button>
@@ -186,60 +130,63 @@ export default function Addtable() {
                                 <Grid container>
                                     <Grid item lg={6}>
                                         <Stack spacing={3}>
-                                            <Grid item lg={12}> <FormControl>
-                                                <FormLabel id="demo-row-radio-buttons-group-label">Are You Experienced</FormLabel>
-                                                <RadioGroup
-                                                    row
-                                                    aria-labelledby="demo-row-radio-buttons-group-label"
-                                                    name="row-radio-buttons-group"
-                                                >
-                                                    <FormControlLabel value="Yes" control={<Radio />} label="Yes" {...register("Experience", {
-                                                        required: " Enter your Experience",
-                                                    })} />
-                                                    <FormControlLabel value="No" control={<Radio />} label="No"  {...register("Experience", {
-                                                        required: " Enter your Experience",
-                                                    })} />
-                                                </RadioGroup>
+                                            <Grid item lg={12}>
+                                                {/* <FormControl>
+                                                    <FormLabel id="demo-row-radio-buttons-group-label">Are You Experienced</FormLabel>
+                                                    <RadioGroup
+                                                        row
+                                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                                        name="row-radio-buttons-group"
+                                                    >
+                                                        <FormControlLabel value="Yes" control={<Radio />} label="Yes" {...register("Experience", {
+                                                            required: " Enter your Experience",
+                                                        })} />
+                                                        <FormControlLabel value="No" control={<Radio />} label="No"  {...register("Experience", {
+                                                            required: " Enter your Experience",
+                                                        })} />
+                                                    </RadioGroup>
+                                                    {errors.Experience && (
+                                                        <p className="errormsg">{errors.Experience.message}</p>
+                                                    )}
+                                                </FormControl> */}
+                                                <label htmlFor="">Are You Experienced</label><br />
+                                                <input {...register("Experience", { required: "Please upload your resume" })} type="radio" value="Yes" />
+                                                <input {...register("Experience", { required: "Please upload your resume" })} type="radio" value="No" />
+
                                                 {errors.Experience && (
                                                     <p className="errormsg">{errors.Experience.message}</p>
                                                 )}
-                                            </FormControl></Grid>
+                                            </Grid>
                                             <Grid item lg={12}>
-                                                {/* <TextFields
-                                                variant="outlined"
-                                                fullWidth sx={{ margin: '0px 5px' }}
-                                                value={value}
-                                                onChange={(e) => setValue(e.target.value)}
-                                                select
-                                                label="Where You Found Us"
-                                            // {...register("social", { required: "Select an option" })}
-                                            >
-                                                <MenuItem key={1} value="Instagram">
-                                                    Instagram
-                                                </MenuItem>
-                                                <MenuItem key={2} value="Facebook">
-                                                    Facebook
-                                                </MenuItem>
-                                                <MenuItem key={3} value="Linkedin">
-                                                    Linkedin
-                                                </MenuItem>
-                                                <MenuItem key={4} value="Whatsapp">
-                                                    Whatsapp
-                                                </MenuItem>
-                                                <MenuItem key={5} value="From Others">
-                                                    From Others
-                                                </MenuItem>
-                                            </TextFields> */}
-                                                {errors.social && (
-                                                    <p className="errormsg">{errors.social.message}</p>
+                                                <label htmlFor="">Where You Found Us</label><br />
+                                                <select name="" id="selection" {...register('Reference', { required: "Please upload your resume" })}>
+                                                    <option value=""></option>
+                                                    <option value="Instagram">
+                                                        Instagram
+                                                    </option>
+                                                    <option value="Facebook">
+                                                        Facebook
+                                                    </option>
+                                                    <option value="Linkedin">
+                                                        Linkedin
+                                                    </option>
+                                                    <option value="Whatsapp">
+                                                        Whatsapp
+                                                    </option>
+                                                    <option value="From Others">
+                                                        From Others
+                                                    </option>
+                                                </select>
+                                                {errors.Reference && (
+                                                    <p className="errormsg">{errors.Reference.message}</p>
                                                 )}</Grid>
-                                            {/* <Grid item lg={12}> 
-                                            <TextFields fullWidth sx={{ margin: '0px 5px' }} label="Upload Your Resume" type="file" variant="outlined" InputLabelProps={{ shrink: true }}   {...register("resume", {
-                                                required: "Please upload your resume",
-                                            })} />
-                                                {errors.resume && (
-                                                    <p className="errormsg">{errors.resume.message}</p>
-                                                )}</Grid> */}
+                                            <Grid item lg={12}>
+                                                <TextFields fullWidth sx={{ margin: '0px 5px' }} label="Upload Your Resume" type="file" variant="outlined" InputLabelProps={{ shrink: true }}   {...register("resume1", {
+                                                    required: "Please upload your resume",
+                                                })} />
+                                                {errors.resume1 && (
+                                                    <p className="errormsg">{errors.resume1.message}</p>
+                                                )}</Grid>
                                         </Stack>
                                     </Grid>
                                     <Grid item lg={6}>
