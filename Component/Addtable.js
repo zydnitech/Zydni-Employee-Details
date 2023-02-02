@@ -3,9 +3,6 @@ import { Backdrop, Button, Checkbox, Fade, FormControl, FormControlLabel, FormLa
 import { Box } from '@mui/system'
 import { Controller, useForm } from 'react-hook-form';
 import axios from 'axios';
-import { Instagram } from '@mui/icons-material';
-// import Select from "react-select";
-
 
 export default function Addtable() {
     const style = {
@@ -44,20 +41,15 @@ export default function Addtable() {
     const handleClose = () => setOpen(false);
     const {
         register,
-        handleSubmit, control,
+        handleSubmit, 
         formState: { errors },
     } = useForm();
     const onSubmit = (d) => {
-        // const body = {
-        //     ...d,
-        //     Reference: "Instag"
-        // }
         axios.post(`http://192.168.0.101:8030/api/resumeapi`, d).then((res) => {
             console.log('working', res);
         }).catch((e) => {
             console.log('ERROR OCCURED', e);
         })
-        console.log(d, 'data fetching')
     }
 
     const [selectedValue, setSelectedValue] = useState('');
