@@ -183,7 +183,9 @@ input[type="radio"] {
 .pagination {
     display: flex;
     justify-content: center;
+    text-align: center;
     list-style: none;
+    align-items: center;
 }
 
 .previous,
@@ -192,7 +194,7 @@ input[type="radio"] {
     border: none;
     width: 60px;
     border-radius: 10px;
-    background-color: transparent !important;
+    background-color: white !important;
 }
 
 .pagination a {
@@ -200,21 +202,20 @@ input[type="radio"] {
     text-decoration: none;
 }
 
-.pagination li {
+.pagination li a{
     font-size: 22px;
     text-align: center;
     border-radius: 30px;
-    margin: 0px 5px 0px 5px;
+    margin: 5px;
+    padding: 5px;
 }
 
-.pagination a:hover,
-.active {
-    margin: 0px 5px 0px 5px;
-    color: white;
-    padding: 0px 10px 0px 10px;
+ .selected , .active {
+    color: white !important;
     border-radius: 10px;
     text-decoration: none;
-    background-color: antiquewhite
+    background-color: #4c8c75;
+    
 }
 
 /* add table */

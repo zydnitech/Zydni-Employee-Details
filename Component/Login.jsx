@@ -47,7 +47,7 @@ export default function Login({ data }) {
                                             <AccountCircle />
                                         </InputAdornment>
                                     ),
-                                }} className='m-2 ' label="Enter Your Password" variant="standard" type="password" name="password"
+                                }} className='m-2 ' label="Enter Your Password" variant="standard" type="password" name="password" autoComplete="on"
                                 {...register("password", {
                                     required: "Please enter your Password",
                                 })}  />

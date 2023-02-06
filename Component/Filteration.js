@@ -6,29 +6,21 @@ import { Replay, Search } from "@mui/icons-material";
 import Addtable from "./Addtable";
 import Head from "next/head";
 import Image from "next/image";
-import styled from "@emotion/styled";
+import { TextFields } from '../styles/muistyle';
 
 export default function Filteration() {
-    const TextFields = styled(TextField)({
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderColor: 'Black',
-                borderRadius: "10px"
-            }
-        },
-    });
+
     // data fetch
     const [js, setjs] = useState([]);
-    // useEffect(() => {
-    //     fetch("https://api.mockaroo.com/api/2b1e9230?count=1000&key=abad0ad0")
-    //         .then((response) => response.json())
-    //         .then((data) => setjs(data));
-    // }, []);
     useEffect(() => {
-        fetch('http://192.168.0.101:8030/api/resumeapi')
-            .then((response) => response.json())
-            .then((data) => setjs([...data].reverse()));
+        resumeList();
     }, []);
+
+    const resumeList = ()=>{
+        fetch('http://192.168.0.100:8030/api/resumeapi')
+        .then((response) => response.json())
+        .then((data) => setjs([...data].reverse()));
+    }
     //  search entites
     const [value, setValue] = useState(5);
     // search bar
@@ -37,7 +29,8 @@ export default function Filteration() {
 
     const handleSearch = (event) => {
         setsearchQuery(event.target.value);
-        setFilteredData(
+
+        searchQuery && setFilteredData(
             js.filter(
                 (item) =>
                     item.FirstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -46,17 +39,18 @@ export default function Filteration() {
                     item.ContactNo.toString().includes(searchQuery) ||
                     item.Qualification.toLowerCase().includes(searchQuery.toLowerCase()) ||
                     item.SkillSet.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    item.Reference.toLowerCase().includes(searchQuery.toLowerCase())
-                // item.Experience.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                // item.Date.toString().includes(searchQuery) ||
-                // item.Status.toLowerCase().includes(searchQuery.toLowerCase()) 
-            )
+                    item.Reference.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    item.Experience.toLowerCase().includes(searchQuery.toLowerCase()) 
+                    // item.Date.toString().includes(searchQuery) ||
+                    // item.Status.toLowerCase().includes(searchQuery.toLowerCase())
+            ) 
         );
+
     };
     console.log(filteredData, 'data')
     // Refresher button
     const refresher = () => {
-        window.location.reload(false);
+        resumeList();
     };
     return (
         <Box>
@@ -80,7 +74,7 @@ export default function Filteration() {
                                     select
                                     label="Show Entities"
                                 >
-                                    <MenuItem key={1} value="5">
+                                    <MenuItem key={1} value={"5"|| ""}>
                                         5
                                     </MenuItem>
                                     <MenuItem key={2} value="10">
@@ -118,7 +112,7 @@ export default function Filteration() {
                         <Grid item lg={4} md={7} sm={7} xs={12}>
                             <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                 <Search sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-                                <TextField id="input-with-sx searchbar" type='search' value={searchQuery} onChange={handleSearch}
+                                <TextFields id="input-with-sx searchbar" type='search' value={searchQuery} onChange={handleSearch}
                                     label="Search..." variant="standard" />
                             </Box>
                         </Grid>
@@ -126,8 +120,10 @@ export default function Filteration() {
                 </Stack>
             </div>
             <Tabledata
+                resumeList={resumeList}
                 value={value}
-                data={filteredData}
+                searchQuery = {searchQuery}
+                data={ js }
             />
 
         </Box>
