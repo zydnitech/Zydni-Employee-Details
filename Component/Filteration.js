@@ -7,6 +7,7 @@ import Addtable from "./Addtable";
 import Head from "next/head";
 import Image from "next/image";
 import { TextFields } from '../styles/muistyle';
+import { apiBaseUrl } from "@/config/config";
 
 export default function Filteration() {
 
@@ -17,7 +18,7 @@ export default function Filteration() {
     }, []);
 
     const resumeList = ()=>{
-        fetch('http://192.168.0.100:8030/api/resumeapi')
+        fetch( apiBaseUrl +'api/resumeapi')
         .then((response) => response.json())
         .then((data) => setjs([...data].reverse()));
     }
@@ -40,10 +41,10 @@ export default function Filteration() {
                     item.Qualification.toLowerCase().includes(searchQuery.toLowerCase()) ||
                     item.SkillSet.toLowerCase().includes(searchQuery.toLowerCase()) ||
                     item.Reference.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    item.Experience.toLowerCase().includes(searchQuery.toLowerCase()) 
+                    item.Experience.toLowerCase().includes(searchQuery.toLowerCase())
                     // item.Date.toString().includes(searchQuery) ||
                     // item.Status.toLowerCase().includes(searchQuery.toLowerCase())
-            ) 
+            )
         );
 
     };

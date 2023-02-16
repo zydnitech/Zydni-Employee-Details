@@ -23,17 +23,18 @@ export const TextFields = styled(TextField)({
     },
 });
 
- // modal style 
-export const style = {
+// modal style
+export const Modal_Style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+    width: 400,
     bgcolor: 'white',
     boxShadow: 24,
     p: 4,
+    color: "black"
 };
-
 // file upload button
 export const Buttons = styled(Button)({
     fontSize: 16,
