@@ -48,7 +48,6 @@ export default function Filteration() {
         );
 
     };
-    console.log(filteredData, 'data')
     // Refresher button
     const refresher = () => {
         resumeList();

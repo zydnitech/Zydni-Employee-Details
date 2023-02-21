@@ -32,11 +32,19 @@ export default function Tabledata({ resumeList, data, value }) {
         formState: { errors },
     } = useForm();
     const onSubmit = (d) => {
-        console.log(d)
-        axios.patch(apiBaseUrl + `api/resumeapi/${updatestatus}`, {
-            "op": "replace", "path": "Status",
-            "value": d
-        }).then((res) => {
+        console.log(d, " entre")
+        var bodyFormData = [];
+        console.log(d);
+        for (const [key, value] of Object.entries(d)) {
+
+            bodyFormData.push({
+                "op": "replace",
+                "path": key,
+                "value": value
+            });
+
+        }
+        axios.patch(apiBaseUrl + `api/resumeapi/${updatestatus}`, bodyFormData).then((res) => {
             console.log('working', res);
             setOpen(false);
             resumeList();
@@ -47,9 +55,8 @@ export default function Tabledata({ resumeList, data, value }) {
 
     // modal actions
     const [open, setOpen] = useState(false);
-    const handleOpen = (id) => {
+    const handleOpen = () => {
         setOpen(true);
-        setupdatestatus(id);
     }
     const handleClose = () => setOpen(false);
     // rstatus action
@@ -120,7 +127,7 @@ export default function Tabledata({ resumeList, data, value }) {
                                         <td>{d.reference}</td>
                                         <td style={{ "wordBreak": "break-all" }}><a download={apiBaseUrl + d.resumeFilePath} href={apiBaseUrl + d.resumeFilePath}>{d.resumeName}</a></td>
                                         <td id="statusData">{d.status}</td>
-                                        <td><Button onClick={() => { handleOpen(d.Id) }}>Update</Button></td>
+                                        <td><Button onClick={() => { handleOpen(); setupdatestatus(d.id) }}>Update</Button></td>
                                         {/* <td>{d.comments}</td> */}
                                     </tr>
                                 )
