@@ -111,6 +111,21 @@
     margin: 0px 5px;
 }
 
+table {
+    table-layout: fixed !important;
+}
+th{
+    background-color: #f14722;
+    color: white;
+
+}
+th,
+tr,
+td {
+    border: 1px solid gray;
+    padding: 10px;
+}
+
 @media only screen and (max-width : 991) {
     .datepicker {
         display: block;
@@ -202,7 +217,7 @@ input[type="radio"] {
     text-decoration: none;
 }
 
-.pagination li a{
+.pagination li a {
     font-size: 22px;
     text-align: center;
     border-radius: 30px;
@@ -210,12 +225,13 @@ input[type="radio"] {
     padding: 5px;
 }
 
- .selected , .active {
+.selected,
+.active {
     color: white !important;
     border-radius: 10px;
     text-decoration: none;
     background-color: #4c8c75;
-    
+
 }
 
 /* add table */

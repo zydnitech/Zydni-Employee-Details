@@ -1,5 +1,5 @@
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
-import { Backdrop, Box, Button, Fade, FormControl, FormControlLabel, Modal, Radio, RadioGroup } from "@mui/material";
+import { ArrowBackIos, ArrowForwardIos, Download, VisibilityOutlined } from "@mui/icons-material";
+import { Backdrop, Box, Button, Fade, FormControl, FormControlLabel, IconButton, Modal, Radio, RadioGroup } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -32,9 +32,7 @@ export default function Tabledata({ resumeList, data, value }) {
         formState: { errors },
     } = useForm();
     const onSubmit = (d) => {
-        console.log(d, " entre")
         var bodyFormData = [];
-        console.log(d);
         for (const [key, value] of Object.entries(d)) {
 
             bodyFormData.push({
@@ -64,9 +62,9 @@ export default function Tabledata({ resumeList, data, value }) {
     console.log(updatestatus)
 
     return (
-        <div className="container mt-5 mb-5">
+        <div className="">
             {currentItems?.length === 0 ? (
-                <div className="card-loading loading-card loading-is-loading mx-auto">
+                <div className="card-loading loading-card loading-is-loading mx-auto container">
                     <div className='d-flex'>
                         <h1 className='loading-card-cell'></h1>
                         <h1 className='loading-card-cell'></h1>
@@ -93,21 +91,24 @@ export default function Tabledata({ resumeList, data, value }) {
                     </div>
                 </div>
             ) : (
-                <div className="table-responsive-xxl">
-                    <table className="table table-bordered align-middle" id="table1">
+                <div className=" container mt-5 mb-5 table-responsive">
+                    {/* <table className="table table-bordered align-middle" id="table1"> */}
+                    <table className="">
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th style={{ "width": "20%" }}>Full Name</th>
-                                <th style={{ "width": "20%" }}>Email</th>
-                                <th style={{ "width": "20%" }}>Contact Number</th>
+                                <th >Full Name</th>
+                                <th style={{ "width": "50%" }} >Email</th>
+                                <th >Contact Number</th>
                                 <th>Qualification</th>
                                 <th>Date</th>
                                 <th>SkillSets</th>
                                 <th>Experienced</th>
                                 <th>Reference</th>
-                                <th style={{ "width": "20%" }}>Resume</th>
+                                <th >Resume</th>
                                 {/* <th style={{ "width" : "30%" }}>Comment</th> */}
+                                <th>Test Name</th>
+                                <th>Score</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -125,7 +126,13 @@ export default function Tabledata({ resumeList, data, value }) {
                                         <td>{d.skillSet}</td>
                                         <td>{d.experience}</td>
                                         <td>{d.reference}</td>
-                                        <td style={{ "wordBreak": "break-all" }}><a download={apiBaseUrl + d.resumeFilePath} href={apiBaseUrl + d.resumeFilePath}>{d.resumeName}</a></td>
+                                        <td style={{ "wordBreak": "break-all" }}><a target='_blank' download={apiBaseUrl + d.resumeFilePath} href={d.resumeFilePath}>
+                                            <IconButton variant="outlined" sx={{margin : "auto", display : "block"}}>
+                                            <VisibilityOutlined />
+                                            </IconButton>
+                                            </a></td>
+                                        <td>{d.testTaken}</td>
+                                        <td>{d.score}</td>
                                         <td id="statusData">{d.status}</td>
                                         <td><Button onClick={() => { handleOpen(); setupdatestatus(d.id) }}>Update</Button></td>
                                         {/* <td>{d.comments}</td> */}
