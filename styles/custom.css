@@ -58,6 +58,21 @@
     display: flex;
 }
 
+@media screen and (max-width : 576px) {
+    .heading {
+        display: block !important;
+    }
+
+    .head-img {
+        margin: auto;
+        display: block;
+    }
+
+    .resume-text {
+        font-size: 17px !important;
+    }
+}
+
 .resume-text {
     font-size: 25px;
     font-weight: 700;
@@ -91,7 +106,6 @@
     to {
         background-color: #239B99;
     }
-
 }
 
 .filters {
@@ -113,12 +127,14 @@
 
 table {
     table-layout: fixed !important;
+    width: max-content;
 }
-th{
+
+th {
     background-color: #f14722;
     color: white;
-
 }
+
 th,
 tr,
 td {
@@ -194,7 +210,6 @@ input[type="radio"] {
 }
 
 /* pagination */
-
 .pagination {
     display: flex;
     justify-content: center;
@@ -231,7 +246,6 @@ input[type="radio"] {
     border-radius: 10px;
     text-decoration: none;
     background-color: #4c8c75;
-
 }
 
 /* add table */

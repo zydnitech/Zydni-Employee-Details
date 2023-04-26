@@ -43,7 +43,7 @@ export default function Tabledata({ resumeList, data, value }) {
 
         }
         axios.patch(apiBaseUrl + `api/resumeapi/${updatestatus}`, bodyFormData).then((res) => {
-            console.log('working', res);
+            // console.log('working', res);
             setOpen(false);
             resumeList();
         }).catch((e) => {
@@ -59,8 +59,7 @@ export default function Tabledata({ resumeList, data, value }) {
     const handleClose = () => setOpen(false);
     // rstatus action
     const [updatestatus, setupdatestatus] = useState(null)
-    console.log(updatestatus)
-
+    // console.log(updatestatus)
     return (
         <div className="">
             {currentItems?.length === 0 ? (
@@ -98,7 +97,7 @@ export default function Tabledata({ resumeList, data, value }) {
                             <tr>
                                 <th>Id</th>
                                 <th >Full Name</th>
-                                <th style={{ "width": "50%" }} >Email</th>
+                                <th >Email</th>
                                 <th >Contact Number</th>
                                 <th>Qualification</th>
                                 <th>Date</th>
@@ -127,10 +126,10 @@ export default function Tabledata({ resumeList, data, value }) {
                                         <td>{d.experience}</td>
                                         <td>{d.reference}</td>
                                         <td style={{ "wordBreak": "break-all" }}><a target='_blank' download={apiBaseUrl + d.resumeFilePath} href={d.resumeFilePath}>
-                                            <IconButton variant="outlined" sx={{margin : "auto", display : "block"}}>
-                                            <VisibilityOutlined />
+                                            <IconButton variant="outlined" sx={{ margin: "auto", display: "block" }}>
+                                                <VisibilityOutlined />
                                             </IconButton>
-                                            </a></td>
+                                        </a></td>
                                         <td>{d.testTaken}</td>
                                         <td>{d.score}</td>
                                         <td id="statusData">{d.status}</td>

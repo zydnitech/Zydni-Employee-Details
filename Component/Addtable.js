@@ -18,10 +18,10 @@ export default function Addtable() {
     } = useForm();
     const onSubmit = (d) => {
         var bodyFormData = new FormData();
-        console.log(d);
+
         for (const [key, value] of Object.entries(d)) {
             if (key == 'resumeFile') {
-                console.log(value);
+
                 bodyFormData.append(key, value[0]);
             } else {
                 bodyFormData.append(key, value);

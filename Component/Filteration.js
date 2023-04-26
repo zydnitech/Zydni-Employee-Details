@@ -26,28 +26,17 @@ export default function Filteration() {
     const [value, setValue] = useState(5);
     // search bar
     const [searchQuery, setsearchQuery] = useState('');
-    const [filteredData, setFilteredData] = useState(js);
+    // const [filteredData, setFilteredData] = useState(js);
 
     const handleSearch = (event) => {
         setsearchQuery(event.target.value);
-
-        searchQuery && setFilteredData(
-            js.filter(
-                (item) =>
-                    item.FirstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    item.LastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    item.Email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    item.ContactNo.toString().includes(searchQuery) ||
-                    item.Qualification.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    item.SkillSet.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    item.Reference.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    item.Experience.toLowerCase().includes(searchQuery.toLowerCase())
-                // item.Date.toString().includes(searchQuery) ||
-                // item.Status.toLowerCase().includes(searchQuery.toLowerCase())
-            )
-        );
-
     };
+
+    const filteredData = js.filter((item) => {
+        return Object.values(item).some((value) => {
+            return value && value?.toString().toLowerCase().includes(searchQuery.toLowerCase());
+        });
+    });
     // Refresher button
     const refresher = () => {
         resumeList();
@@ -58,13 +47,13 @@ export default function Filteration() {
                 <title>Employee data</title>
             </Head>
             <div className="container d-flex heading mt-4 mb-5">
-                <Image height={100} width={200} src="/zydni_logo.png" alt="LOGO" />
-                <p className="resume-text  text-center">Zydnisdafadfafassda Resume Portal</p>
+                <Image height={100} width={200} src="/zydni_logo.png" alt="LOGO" className="head-img" />
+                <p className="resume-text  text-center">Zydni Resume Portal</p>
             </div>
             <div className="container center-box mt-2 mb-2">
                 <Stack spacing={3}>
                     <Grid container spacing={2} className="filters">
-                        <Grid item lg={3} md={3} sm={3} xs={12}>
+                        <Grid item lg={3} md={2} sm={6} xs={6}>
                             <FormControl variant="standard" sx={{ m: 1, minWidth: 100 }}>
                                 <TextFields
                                     variant="outlined"
@@ -97,7 +86,7 @@ export default function Filteration() {
                             </FormControl>
                         </Grid>
 
-                        <Grid item lg={2} md={3} sm={3} xs={12}>
+                        <Grid item lg={2} md={2} sm={6} xs={6}>
                             <Addtable sx={{ marginTop: "14px" }} />
                         </Grid>
                         <Grid item lg={1} md={1} sm={2} xs={6}>
@@ -105,11 +94,11 @@ export default function Filteration() {
                                 <Replay onClick={refresher} />
                             </Button>
                         </Grid>
-                        <Grid item lg={2} md={3} sm={3} xs={6}>
+                        <Grid item lg={2} md={2} sm={4} xs={6}>
                             <Button className="expbtn" variant="contained" sx={{ marginTop: "14px" }}><CSVLink data={js}>Export</CSVLink>
                             </Button>
                         </Grid>
-                        <Grid item lg={4} md={7} sm={7} xs={12}>
+                        <Grid item lg={4} md={4} sm={4} xs={12}>
                             <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                                 <Search sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
                                 <TextFields id="input-with-sx searchbar" type='search' value={searchQuery} onChange={handleSearch}
@@ -122,8 +111,7 @@ export default function Filteration() {
             <Tabledata
                 resumeList={resumeList}
                 value={value}
-                searchQuery={searchQuery}
-                data={js}
+                data={filteredData}
             />
 
         </Box>

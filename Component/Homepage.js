@@ -9,16 +9,17 @@ export default function Homepage() {
   //     .then((response) => response.json())
   //     .then((data) => setlogincre(data));
   // }, []);
-  console.log(logincre)
   const logindata = { username: "imran", password: "1234" };
 
   const data = (d) => {
-    console.log(d);
+    let userinputs = d
+    userinputs.username.toLowerCase()
+
     if (
       //   d.username === logincre.UserName &&
       //   d.password === logincre.Password
-      d.username === logindata.username &&
-      d.password === logindata.password
+      userinputs.username === logindata.username &&
+      userinputs.password === logindata.password
     ) {
       console.log("working")
       setuserdata(d);
