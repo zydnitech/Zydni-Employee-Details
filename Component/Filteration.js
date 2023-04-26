@@ -17,10 +17,10 @@ export default function Filteration() {
         resumeList();
     }, []);
 
-    const resumeList = ()=>{
-        fetch( apiBaseUrl +'api/resumeapi')
-        .then((response) => response.json())
-        .then((data) => setjs([...data].reverse()));
+    const resumeList = () => {
+        fetch(apiBaseUrl + 'api/resumeapi')
+            .then((response) => response.json())
+            .then((data) => setjs([...data].reverse()));
     }
     //  search entites
     const [value, setValue] = useState(5);
@@ -42,8 +42,8 @@ export default function Filteration() {
                     item.SkillSet.toLowerCase().includes(searchQuery.toLowerCase()) ||
                     item.Reference.toLowerCase().includes(searchQuery.toLowerCase()) ||
                     item.Experience.toLowerCase().includes(searchQuery.toLowerCase())
-                    // item.Date.toString().includes(searchQuery) ||
-                    // item.Status.toLowerCase().includes(searchQuery.toLowerCase())
+                // item.Date.toString().includes(searchQuery) ||
+                // item.Status.toLowerCase().includes(searchQuery.toLowerCase())
             )
         );
 
@@ -59,7 +59,7 @@ export default function Filteration() {
             </Head>
             <div className="container d-flex heading mt-4 mb-5">
                 <Image height={100} width={200} src="/zydni_logo.png" alt="LOGO" />
-                <p className="resume-text  text-center">Zydni Resume Portal</p>
+                <p className="resume-text  text-center">Zydnisdafadfafassda Resume Portal</p>
             </div>
             <div className="container center-box mt-2 mb-2">
                 <Stack spacing={3}>
@@ -74,7 +74,7 @@ export default function Filteration() {
                                     select
                                     label="Show Entities"
                                 >
-                                    <MenuItem key={1} value={"5"|| ""}>
+                                    <MenuItem key={1} value={"5" || ""}>
                                         5
                                     </MenuItem>
                                     <MenuItem key={2} value="10">
@@ -122,8 +122,8 @@ export default function Filteration() {
             <Tabledata
                 resumeList={resumeList}
                 value={value}
-                searchQuery = {searchQuery}
-                data={ js }
+                searchQuery={searchQuery}
+                data={js}
             />
 
         </Box>
