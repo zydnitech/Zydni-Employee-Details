@@ -3,25 +3,32 @@ import { Button, FormControl, FormControlLabel, FormLabel, Grid, Modal, Radio, R
 import { Box } from '@mui/system'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { ThumbUp } from '@mui/icons-material';
-import { TextFields, Buttons, Modal_Style } from '../styles/muistyle';
+import { Error, ThumbUp, Timer } from '@mui/icons-material';
+import { TextFields, Buttons, Modal_Style, Modal_btn } from '../styles/muistyle';
 import { apiBaseUrl } from '@/config/config';
 
 export default function Addtable() {
 
     const [open, setOpen] = useState(false);
     const handleClose = () => setOpen(false);
+    const [open_error, setOpen_error] = useState(false);
+    const handleClose_error = () => setOpen_error(false);
+    const [open_submit, setOpen_submit] = useState(false);
+    const handleClose_submit = () => setOpen_submit(false);
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
     const onSubmit = (d) => {
+        setOpen_submit(true)
+        setTimeout(() => {
+            setOpen_submit(false)
+        }, 3000);
         var bodyFormData = new FormData();
-
         for (const [key, value] of Object.entries(d)) {
             if (key == 'resumeFile') {
-
+                console.log(value);
                 bodyFormData.append(key, value[0]);
             } else {
                 bodyFormData.append(key, value);
@@ -32,13 +39,13 @@ export default function Addtable() {
             url: apiBaseUrl + `api/resumeapi`,
             data: bodyFormData,
             headers: { "Content-Type": "multipart/form-data" },
+        }).then((res) => {
+            setOpen(true)
+            console.log('YOUR DATA IS SUBMITTED', res);
+        }).catch((e) => {
+            setOpen_error(true)
+            console.log('ERROR OCCURED', e);
         })
-            .then((res) => {
-                setOpen(true)
-                console.log('YOUR DATA IS SUBMITTED', res);
-            }).catch((e) => {
-                console.log('ERROR OCCURED', e);
-            })
     }
     // submit modal
     const [openmodal, setopenmodal] = useState('')
@@ -194,18 +201,43 @@ export default function Addtable() {
                 </div>
             </div>
             <div>
-                <Modal open={open} onClose={handleClose} >
+                <Modal open={open} onClose={handleClose}>
                     <Box sx={Modal_Style}>
                         <div className="row">
                             <div className="col-4">
-                                <ThumbUp sx={{ marginLeft: '20px', fontSize: '75px' }} />
+                                <ThumbUp sx={Modal_btn} />
                             </div>
-                            <div className="col-8">It is our pleasure to acknowledge the receipt of your
+                            <div className="col-8 m-auto">It is our pleasure to acknowledge the receipt of your
                                 application, and we will review it and get back to you as soon as possible.
+                            </div>
+                        </div>
+
+                    </Box>
+                </Modal>
+                <Modal open={open_error} onClose={handleClose_error}>
+                    <Box sx={Modal_Style}>
+                        <div className="row">
+                            <div className="col-4">
+                                <Error sx={Modal_btn} />
+                            </div>
+                            <div className="col-8 m-auto">This email already exists in our database
                             </div>
                         </div>
                     </Box>
                 </Modal>
+                <Modal open={open_submit} onClose={handleClose_submit}>
+                    <Box sx={Modal_Style}>
+                        <div className="row">
+                            <div className="col-4">
+                                <Timer sx={Modal_btn} />
+                            </div>
+                            <div className="col-8 m-auto">The data is being verified. Please wait!!!
+                            </div>
+                        </div>
+
+                    </Box>
+                </Modal>
+
             </div>
         </Box>
     )

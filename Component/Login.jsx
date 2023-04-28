@@ -50,7 +50,7 @@ export default function Login({ data }) {
                                 }} className='m-2 ' label="Enter Your Password" variant="standard" type="password" name="password" autoComplete="on"
                                 {...register("password", {
                                     required: "Please enter your Password",
-                                })}  />
+                                })} />
                             {errors.password && (
                                 <p className="errormsg">{errors.password.message}</p>
                             )}

@@ -49,3 +49,8 @@ export const Buttons = styled(Button)({
         boxShadow: 'none',
     },
 });
+export const Modal_btn = {
+    margin: 'auto',
+    height: '100%',
+    display: 'block', fontSize: '75px'
+}
